@@ -6,24 +6,45 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
-    public void TestPriorityQueue_1()
+    // Scenario: Dequeue from an empty queue.
+    // Expected Result: Throws InvalidOperationException.
+    public void TestDequeue_EmptyQueue_ThrowsException()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        Assert.ThrowsException<InvalidOperationException>(() => priorityQueue.Dequeue());
     }
 
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
-    public void TestPriorityQueue_2()
+    // Scenario: Enqueue and Dequeue with one item.
+    // Expected Result: Returns the single item.
+    public void TestDequeue_SingleItem()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        priorityQueue.Enqueue("Manuel", 1);
+        Assert.AreEqual("Manuel", priorityQueue.Dequeue());
     }
 
-    // Add more test cases as needed below.
+    [TestMethod]
+    // Scenario: Enqueue multiple items and Dequeue highest priority.
+    // Expected Result: Returns the item with the highest priority.
+    public void TestDequeue_HighestPriorityItem()
+    {
+        var priorityQueue = new PriorityQueue();
+        priorityQueue.Enqueue("Manuel", 1);
+        priorityQueue.Enqueue("Sofia", 3);
+        priorityQueue.Enqueue("Eduardo", 2);
+        Assert.AreEqual("Sofia", priorityQueue.Dequeue());
+    }
+
+    [TestMethod]
+    // Scenario: Enqueue multiple items with the same priority.
+    // Expected Result: Returns the first item with the highest priority.
+    public void TestDequeue_SamePriority()
+    {
+        var priorityQueue = new PriorityQueue();
+        priorityQueue.Enqueue("Manuel", 3);
+        priorityQueue.Enqueue("Sofia", 3);
+        priorityQueue.Enqueue("Eduardo", 2);
+        Assert.AreEqual("Manuel", priorityQueue.Dequeue());
+    }
 }
